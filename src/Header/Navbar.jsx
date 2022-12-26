@@ -25,18 +25,18 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item">
-              <NavLink to="/about" activeClassName="active" exact id="lii">
+              <NavLink to="/about" activeClassName="active" exact id="liji">
                 about
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink to="/contact" activeClassName="active" exact id="lii">
+              <NavLink to="/contact" activeClassName="active" exact id="ljii">
                 contact
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/login" activeClassName="active" exact id="lii">
+              <NavLink to="/login" activeClassName="active" exact id="ljii">
                 Sign in
               </NavLink>
             </li>
