@@ -28,7 +28,6 @@
     font-size: 18px;
     font-weight: 500;
     color: rgb(0, 0, 0);
-    display: block;
 }
 
 .active {
@@ -38,10 +37,8 @@
 
 #lii:hover {
     color: tomato;
-    font-size: 20px;
-        position: absolute;
-        top: 0;
-        left: 0;
+    font-size: 25px;
+        display: block;
 }
 
 #img {
