@@ -1,8 +1,24 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+
 
 const Login = () => {
+
+  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm({
+    defaultValues: {
+      checkbox: false,
+      email: '',
+      password: ''
+    }
+  });
+
+  useEffect(() => {
+    console.log();
+  });
+
+  const onSubmit = (data) => { console.log('data', data); }
   return (
     <div className="bg">
       <div>
@@ -19,18 +35,20 @@ const Login = () => {
                 />
               </div>
               <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 shadow  mb-5 rounded mt-5 bg-light">
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <p className="text-center mt-2 fw-bolder fs-5">Login</p>
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="form3Example3">
                       Email address
                     </label>
                     <input
+                      {...register("email", { required: true, min: 3 })}
                       type="email"
                       id="form3Example3"
                       className="form-control form-control-lg"
                       placeholder="Enter a valid email address"
-                    />
+                    /> {errors.email && <p style={{ color: 'red' }}>This field is required</p>}
+
                   </div>
 
                   {/* <!-- Password input --> */}
@@ -39,11 +57,12 @@ const Login = () => {
                       Password
                     </label>
                     <input
+                      {...register("password", { required: true, min: 7 })}
                       type="password"
                       id="form3Example4"
                       className="form-control form-control-lg"
                       placeholder="Enter password"
-                    />
+                    />{errors.password && <p style={{ color: 'red' }}>This field is required</p>}
                   </div>
 
                   <div className="d-flex justify-content-between align-items-center">
@@ -68,15 +87,15 @@ const Login = () => {
                   </div>
 
                   <div className="text-center text-lg-start mt-4 pt-2">
-                    <NavLink to="/">
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-lg"
-                        //   style="padding-left: 2.5rem; padding-right: 2.5rem;"
-                      >
-                        Login
-                      </button>
-                    </NavLink>
+                    {/* <NavLink to="/"> */}
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-lg"
+                    //   style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                    >
+                      Login
+                    </button>
+                    {/* </NavLink> */}
                     <p className="small fw-bold mt-2 pt-1 mb-3">
                       Don't have an account?{" "}
                       <a href="#!" className="link-danger">
