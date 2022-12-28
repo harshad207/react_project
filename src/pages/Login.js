@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
@@ -15,11 +15,11 @@ const Login = () => {
     checkbox: "",
   });
 
-  const navigate = useNavigate();
+  const navigation = useNavigate();
   const onSubmit = (data) => {
     console.log(data);
     setTimeout(() => {
-      navigate("/");
+      navigation("/");
     }, 2000);
   };
   return (
@@ -145,9 +145,9 @@ const Login = () => {
                     </button>
                     <p className="small fw-bold mt-2 py-2 mb-3" id="font">
                       Don't have an account?{" "}
-                      <a href="#!" className="link-danger">
+                      <NavLink to="/register" className="text-danger">
                         Register
-                      </a>
+                      </NavLink>
                     </p>
                   </div>
                 </form>

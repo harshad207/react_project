@@ -8,16 +8,18 @@ import Contact from "./pages/contact/Contact";
 import Error from "./pages/error/Error";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/Login";
+import Register from "./pages/register/Register";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/about" element={<About />} />
-        <Route exact path="/contact" element={<Contact />} />
+        <Route exact="true" path="/" element={<Home />} />
+        <Route exact="true" path="/login" element={<Login />} />
+        <Route exact="true" path="/register" element={<Register />} />
+        <Route exact="true" path="/about" element={<About />} />
+        <Route exact="true" path="/contact" element={<Contact />} />
         <Route element={Error} />
       </Routes>
     </>

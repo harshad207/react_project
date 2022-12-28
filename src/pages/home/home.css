@@ -1,7 +1,7 @@
 .bg {
     background-color: #ffe6e6;
     height: 90vh;
-    scroll-behavior: unset;
+    scroll-behavior: smooth;
 }
 #font {
     font-size: 20px;

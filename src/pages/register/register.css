@@ -1,0 +1,35 @@
+.background {
+    background-color: #ffe6e6;
+    height: 92%;
+}
+
+/* .background:visited {
+    overflow-y: scroll;
+    overflow-x: hidden;
+} */
+.form {
+    padding: 31px 10px;
+}
+
+.reg-row {
+    margin: 0;
+}
+
+
+
+/* .sub_bgd {
+    padding: 39px 0;
+} */
+
+#fSized {
+    font-size: 30px;
+}
+
+#font {
+    font-size: 15px;
+}
+
+/* body {
+    overflow: hidden;
+
+} */
