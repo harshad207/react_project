@@ -1,5 +1,5 @@
 .main_div {
-    height: 50px;
+    height: 8vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -9,6 +9,9 @@
 
 .navbar {
     background-image: linear-gradient(150deg, #380036, #0CBABA);
+    position: sticky !important;
+        top: 0px;
+        z-index: 99;
 }
 
 .right {
@@ -25,7 +28,7 @@
 
 #lii {
     text-decoration: none;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 500;
     color: rgb(0, 0, 0);
 }
