@@ -1,15 +1,10 @@
 .parent_div {
-    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+        flex-direction: column;
 }
-
-
-.div {
-    width: 20%;
-    height: 30%;
-    border: 1px solid black;
-    padding: 30px;
-    border-radius: 10px;
+p {
+    width: 500px;
 }

@@ -1,5 +1,7 @@
 export const ApiActions = {
   USER_REGISTER: " USER_REGISTER",
+  LOGIN_USER: "LOGIN_USER",
+  GET_ALL_USER: "GET_ALL_USER",
 };
 
 const registerAction = {
@@ -7,4 +9,13 @@ const registerAction = {
   payload: null,
 };
 
-export const ApiAction = registerAction;
+const loginAction = {
+  type: ApiActions.LOGIN_USER,
+  payload: null,
+};
+const getallUserAction = {
+  type: ApiActions.GET_ALL_USER,
+  payload: null,
+};
+
+export const ApiAction = registerAction | loginAction | getallUserAction;

@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./register.css";
 import { useApi } from "../../context/useApi";
-
+import { Toast } from "primereact/toast";
 const Register = () => {
+  const toast = useRef(null);
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: { errors },
   } = useForm({
     name: "",
@@ -18,11 +19,17 @@ const Register = () => {
   });
   const { registerUser } = useApi();
   const onSubmit = (data) => {
-    registerUser(data, reset);
+    registerUser(data);
+    toast.current.show({
+      severity: "success",
+      summary: "Success Message",
+      detail: "Registered successfully",
+    });
   };
   return (
     <div className="background">
       <section className="sub_bgd">
+        <Toast ref={toast}></Toast>
         <div className="form">
           <div className="row d-flex justify-content-center align-items-center h-50 reg-row">
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 shadow  rounded  bg-light mt-2">

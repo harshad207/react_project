@@ -9,7 +9,6 @@ export async function callApi({ url, method, body, headers }) {
   console.log("url===>", url);
   let headersData = {
     ...headers,
-    "api-authorization": "3Uy7NIHilkOWviGXMRIl2ZUE4L7Mc8ub4VhosE3l8t8",
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
     Pragma: "no-cache",

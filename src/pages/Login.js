@@ -1,9 +1,13 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useRef } from "react";
+import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { useApi } from "../context/useApi";
+import { Toast } from "primereact/toast";
+import "primeicons/primeicons.css";
 const Login = () => {
+  const toast = useRef(null);
+  const { LoginUser, apiState } = useApi();
   const {
     register,
     handleSubmit,
@@ -15,17 +19,20 @@ const Login = () => {
     checkbox: "",
   });
 
-  const navigation = useNavigate();
   const onSubmit = (data) => {
     console.log(data);
-    setTimeout(() => {
-      navigation("/");
-    }, 2000);
+    LoginUser(data);
+    toast.current.show({
+      severity: "success",
+      summary: "Success Message",
+      detail: apiState.loginUser.message,
+    });
   };
   return (
     <div className="bg">
       <div>
         <section className="pt-5">
+          <Toast ref={toast}></Toast>
           <div className="container-fluid h-custom">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-md-9 col-lg-6 col-xl-5">
@@ -58,7 +65,7 @@ const Login = () => {
                       })}
                       type="email"
                       id="form3Example3"
-                      className="form-control form-control-lg"
+                      className="form-control"
                       placeholder="Enter a valid email address"
                     />
                     {errors.email?.type === "required" && (
@@ -91,7 +98,7 @@ const Login = () => {
                       })}
                       type="password"
                       id="form3Example4"
-                      className="form-control form-control-lg"
+                      className="form-control"
                       placeholder="Enter password"
                     />
                     {errors.password?.type === "required" && (
@@ -138,7 +145,7 @@ const Login = () => {
                   <div className="text-center text-lg-start mt-4 pt-2">
                     <button
                       type="submit"
-                      className="btn btn-primary btn-lg w-50"
+                      className="btn btn-primary btn-md w-50"
                       //   style="padding-left: 2.5rem; padding-right: 2.5rem;"
                     >
                       Login

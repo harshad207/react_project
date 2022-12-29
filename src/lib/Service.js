@@ -8,3 +8,18 @@ export async function doRegister(data) {
     body: data,
   });
 }
+
+export async function doLogin(data) {
+  return await callApi({
+    url: BASE_URL.LOGIN_USER,
+    method: "POST",
+    body: data,
+  });
+}
+
+export async function getAllUser() {
+  return await callApi({
+    url: BASE_URL.GET_USER,
+    method: "GET",
+  });
+}

@@ -8,6 +8,12 @@ const reducer = (state, action) => {
         userRegister: action.payload,
       };
 
+    case ApiActions.LOGIN_USER:
+      return {
+        ...state,
+        loginUser: action.payload,
+      };
+
     default:
       return state;
   }
