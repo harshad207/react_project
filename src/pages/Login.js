@@ -1,28 +1,38 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form";
-
-
+import { useForm } from "react-hook-form";
+import { useApi } from "../context/useApi";
+import { Toast } from "primereact/toast";
+import "primeicons/primeicons.css";
 const Login = () => {
-
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm({
-    defaultValues: {
-      checkbox: false,
-      email: '',
-      password: ''
-    }
+  const toast = useRef(null);
+  const { LoginUser, apiState } = useApi();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    email: "",
+    password: "",
+    checkbox: "",
   });
 
-  useEffect(() => {
-    console.log();
-  });
-
-  const onSubmit = (data) => { console.log('data', data); }
+  const onSubmit = (data) => {
+    console.log(data);
+    LoginUser(data);
+    toast.current.show({
+      severity: "success",
+      summary: "Success Message",
+      detail: apiState.loginUser.message,
+    });
+  };
   return (
     <div className="bg">
       <div>
-        <section className="vh-100">
+        <section className="pt-5">
+          <Toast ref={toast}></Toast>
           <div className="container-fluid h-custom">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-md-9 col-lg-6 col-xl-5">
@@ -38,69 +48,113 @@ const Login = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <p className="text-center mt-2 fw-bolder fs-5">Login</p>
                   <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="form3Example3">
+                    <label
+                      className="form-label"
+                      id="font"
+                      htmlFor="form3Example3"
+                    >
                       Email address
                     </label>
                     <input
-                      {...register("email", { required: true, min: 3 })}
+                      {...register("email", {
+                        required: true,
+                        pattern: {
+                          value:
+                            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        },
+                      })}
                       type="email"
                       id="form3Example3"
-                      className="form-control form-control-lg"
+                      className="form-control"
                       placeholder="Enter a valid email address"
-                    /> {errors.email && <p style={{ color: 'red' }}>This field is required</p>}
-
+                    />
+                    {errors.email?.type === "required" && (
+                      <p style={{ color: "red" }} id="font">
+                        This field is required
+                      </p>
+                    )}
+                    {errors.email?.type === "pattern" && (
+                      <p style={{ color: "red" }} id="font">
+                        Please enter valid email
+                      </p>
+                    )}
                   </div>
 
                   {/* <!-- Password input --> */}
                   <div className="form-outline mb-3">
-                    <label className="form-label" htmlFor="form3Example4">
+                    <label
+                      className="form-label"
+                      htmlFor="form3Example4"
+                      id="font"
+                    >
                       Password
                     </label>
                     <input
-                      {...register("password", { required: true, min: 7 })}
+                      {...register("password", {
+                        required: true,
+                        pattern: {
+                          value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8}/,
+                        },
+                      })}
                       type="password"
                       id="form3Example4"
-                      className="form-control form-control-lg"
+                      className="form-control"
                       placeholder="Enter password"
-                    />{errors.password && <p style={{ color: 'red' }}>This field is required</p>}
+                    />
+                    {errors.password?.type === "required" && (
+                      <p style={{ color: "red" }} id="font">
+                        This field is required
+                      </p>
+                    )}
+                    {errors.password?.type === "pattern" && (
+                      <p style={{ color: "red" }} id="font">
+                        Please enter a valid Password
+                      </p>
+                    )}
                   </div>
 
                   <div className="d-flex justify-content-between align-items-center">
                     {/* <!-- Checkbox --> */}
-                    <div className="form-check mb-0">
-                      <input
-                        className="form-check-input me-2"
-                        type="checkbox"
-                        value=""
-                        id="form2Example3"
-                      />
+                    <div className="form-check ">
                       <label
                         className="form-check-label"
-                        htmlFor="form2Example3"
+                        // htmlFor="form2Example3"
+                        id="font"
                       >
-                        Remember me
+                        Terms & condition accepted
                       </label>
+                      <input
+                        {...register("checkbox", { required: true })}
+                        className="form-check-input me-2"
+                        type="checkbox"
+                        value="true"
+                        id="form2Example3"
+                      />
+
+                      {errors.checkbox?.type === "required" && (
+                        <p style={{ color: "red" }} id="font">
+                          please accept terms and condition
+                        </p>
+                      )}
                     </div>
-                    <a href="#!" className="text-body ">
+                    <a href="#!" className="text-body " id="font">
                       Forgot password?
                     </a>
                   </div>
 
                   <div className="text-center text-lg-start mt-4 pt-2">
-                    {/* <NavLink to="/"> */}
                     <button
                       type="submit"
-                      className="btn btn-primary btn-lg"
+                      className="btn btn-primary btn-md w-50"
                     //   style="padding-left: 2.5rem; padding-right: 2.5rem;"
                     >
                       Login
                     </button>
-                    {/* </NavLink> */}
-                    <p className="small fw-bold mt-2 pt-1 mb-3">
+                    <p className="small fw-bold mt-2 py-2 mb-3" id="font">
                       Don't have an account?{" "}
-                      <a href="#!" className="link-danger">
+                      <NavLink to="/register" className="text-danger">
                         Register
-                      </a>
+                      </NavLink>
                     </p>
                   </div>
                 </form>

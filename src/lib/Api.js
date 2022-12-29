@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getStorage } from "../util/storage";
-import { STORAGE } from "./constant";
+// import { getStorage } from "../util/storage";
+// import { STORAGE } from "./constant";
 const API_URL = "http://localhost:4200";
 const API_VERSION = "/api/v1/";
 export const IMAGE_URL = API_URL + "/";
@@ -9,18 +9,17 @@ export async function callApi({ url, method, body, headers }) {
   console.log("url===>", url);
   let headersData = {
     ...headers,
-    "api-authorization": "3Uy7NIHilkOWviGXMRIl2ZUE4L7Mc8ub4VhosE3l8t8",
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
     Expires: "0",
   };
 
-  const token = await getStorage(STORAGE.TOKEN);
-  console.log("call api8888", token);
-  if (token) {
-    headersData.Authorization = token;
-  }
+  // const token = await getStorage(STORAGE.TOKEN);
+  // console.log("call api8888", token);
+  // if (token) {
+  //   headersData.Authorization = token;
+  // }
   if (url.indexOf("file/single-upload") !== -1) {
     try {
       const data = new FormData();

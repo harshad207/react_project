@@ -1,25 +1,32 @@
 // import "./App.css";
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "./Header/Navbar";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import Error from "./pages/error/Error";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/Login";
+import Register from "./pages/register/Register";
+import User from "./pages/users/User";
+// import { Toast } from "primereact/toast";
 
 function App() {
+  // const toast = useRef(null);
   return (
     <>
+      {/* <Toast ref={toast}></Toast> */}
       <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/contact" component={Contact} />
-        <Route component={Error} />
-      </Switch>
+      <Routes>
+        <Route exact="true" path="/" element={<Home />} />
+        <Route exact="true" path="/login" element={<Login />} />
+        <Route exact="true" path="/register" element={<Register />} />
+        <Route exact="true" path="/about" element={<About />} />
+        <Route exact="true" path="/contact" element={<Contact />} />
+        <Route exact="true" path="/user" element={<User />} />
+        <Route element={Error} />
+      </Routes>
     </>
   );
 }

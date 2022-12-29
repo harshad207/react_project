@@ -16,6 +16,19 @@ const Navbar = () => {
             <li className="nav-item">
               <h4 className=" text-light mt-2">React.js</h4>
             </li>
+            <ul className="right">
+              <li className="nav-item mt-2">
+                <NavLink
+                  to="/user"
+                  activeClassName="active"
+                  exact
+                  id="lii"
+                  className="text-light"
+                >
+                  User
+                </NavLink>
+              </li>
+            </ul>
           </div>
           <ul className="right">
             <li className="nav-item">

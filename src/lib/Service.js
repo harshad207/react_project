@@ -1,7 +1,25 @@
-import React from "react";
+import { BASE_URL } from "./Constant";
+import { callApi } from "../lib/Api";
 
-const Service = () => {
-  return <div>Service</div>;
-};
+export async function doRegister(data) {
+  return await callApi({
+    url: BASE_URL.USER_REGISTER,
+    method: "POST",
+    body: data,
+  });
+}
 
-export default Service;
+export async function doLogin(data) {
+  return await callApi({
+    url: BASE_URL.LOGIN_USER,
+    method: "POST",
+    body: data,
+  });
+}
+
+export async function getAllUser() {
+  return await callApi({
+    url: BASE_URL.GET_USER,
+    method: "GET",
+  });
+}

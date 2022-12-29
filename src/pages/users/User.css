@@ -1,0 +1,15 @@
+.parent_user {
+    margin: 30px;
+}
+
+.list_div {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+.btn_div {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
