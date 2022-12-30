@@ -19,12 +19,12 @@ function App() {
       {/* <Toast ref={toast}></Toast> */}
       <Navbar />
       <Routes>
-        <Route exact="true" path="/" element={<Home />} />
-        <Route exact="true" path="/login" element={<Login />} />
-        <Route exact="true" path="/register" element={<Register />} />
-        <Route exact="true" path="/about" element={<About />} />
-        <Route exact="true" path="/contact" element={<Contact />} />
-        <Route exact="true" path="/user" element={<User />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/user" element={<User />} />
         <Route element={Error} />
       </Routes>
     </>

@@ -57,7 +57,7 @@ export function useApi() {
       console.log("login error error =>", error);
     }
   };
-  const getUser = async () => {
+  const getUserList = async () => {
     try {
       //console.log('data', data);
       const response = await getAllUser();
@@ -82,6 +82,6 @@ export function useApi() {
     apiState,
     registerUser,
     LoginUser,
-    getUser,
+    getUserList,
   };
 }

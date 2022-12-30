@@ -14,6 +14,12 @@ const reducer = (state, action) => {
         loginUser: action.payload,
       };
 
+    case ApiActions.GET_ALL_USER:
+      return {
+        ...state,
+        getAllUser: action.payload,
+      };
+
     default:
       return state;
   }

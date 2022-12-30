@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import "../users/User.css";
 import { useApi } from "../../context/useApi";
+import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 const User = () => {
-  const { apiState, getUser } = useApi();
-  console.log("apiState", apiState);
-
+  const { apiState, getUserList } = useApi();
+  // getUserList();
   useEffect(() => {
-    getUser();
-    console.log("getUser apistate", apiState.getAllUser);
-  }, [apiState]);
+    getUserList();
+    console.log("getUser apistate userpage", apiState);
+  });
   return (
     <div className="parent_user">
       <div className="btn_div mt-5">
@@ -26,31 +26,58 @@ const User = () => {
         <table className="table caption-top">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">id</th>
+              <th scope="col">Profile</th>
+              <th scope="col">NAME</th>
+              <th scope="col">Age</th>
+              <th scope="col">Salary</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            {apiState.getAllUser.map((item, index) => (
+              <tr key={index}>
+                <td>{item?.id}</td>
+                <td>
+                  <img src="/user.jpg" id="img" />
+                </td>
+                <td>{item?.name}</td>
+                <td>{item?.age}</td>
+                <td>{item?.salary}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    id="icon"
+                    onClick={() => {
+                      alert("hii");
+                    }}
+                  >
+                    <FiEye size={20} />
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-info"
+                    id="icon"
+                    onClick={() => {
+                      alert("edit");
+                    }}
+                  >
+                    <FiEdit size={20} />
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    id="icon"
+                    onClick={() => {
+                      alert("delet");
+                    }}
+                  >
+                    <FiTrash2 size={20} />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

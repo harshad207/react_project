@@ -20,7 +20,7 @@ const Navbar = () => {
               <li className="nav-item mt-2">
                 <NavLink
                   to="/user"
-                  activeClassName="active"
+                  activeclassname="active"
                   exact
                   id="lii"
                   className="text-light"
@@ -32,24 +32,24 @@ const Navbar = () => {
           </div>
           <ul className="right">
             <li className="nav-item">
-              <NavLink to="/" activeClassName="active" exact id="lii">
+              <NavLink to="/" activeclassname="active" exact id="lii">
                 Home
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink to="/about" activeClassName="active" exact id="lii">
+              <NavLink to="/about" activeclassname="active" exact id="lii">
                 about
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink to="/contact" activeClassName="active" exact id="lii">
+              <NavLink to="/contact" activeclassname="active" exact id="lii">
                 contact
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/login" activeClassName="active" exact id="lii">
+              <NavLink to="/login" activeclassname="active" exact id="lii">
                 Sign in
               </NavLink>
             </li>
