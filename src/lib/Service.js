@@ -23,3 +23,12 @@ export async function getAllUser() {
     method: "GET",
   });
 }
+
+export async function createUser(data) {
+  console.log("data", data);
+  return await callApi({
+    url: BASE_URL.CREATE_USER,
+    method: "POST",
+    body: data,
+  });
+}

@@ -3,7 +3,7 @@ import "../home/home.css";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 const Home = () => {
   return (
-    <div classNameName="parent">
+    <div className="parent">
       {/* <h1>home page</h1> */}
       <div
         id="carouselExampleCaptions"

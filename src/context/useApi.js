@@ -1,11 +1,13 @@
 /* eslint-disable no-unreachable */
 import { useNavigate } from "react-router-dom";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { ApiActions } from "./apiAction";
 import { ApiContext } from "./apiContext";
+
 // import { Toast } from "primereact/toast";
-import { doLogin, doRegister, getAllUser } from "../lib/Service";
+import { createUser, doLogin, doRegister, getAllUser } from "../lib/Service";
 export function useApi() {
+  const navigate = useNavigate();
   // const ToastSuccess = (data) => {
   //   const toast = useRef(null);
   //   toast.current.show({
@@ -68,13 +70,28 @@ export function useApi() {
           type: ApiActions.GET_ALL_USER,
           payload: response.result,
         });
-        //  setTimeout(() => {
-        //    navigation("/");
-        //  }, 2000);
       } else {
       }
     } catch (error) {
       console.log("getUser error =>", error);
+    }
+  };
+
+  const addUser = async (data) => {
+    try {
+      const response = await createUser(data);
+      console.log("addUser response is => ", response);
+      // ToastSuccess(response.message);
+      if (response && response.status) {
+        dispatch({
+          type: ApiActions.CREATE_USER,
+          payload: response.result,
+        });
+        navigate("/user");
+      } else {
+      }
+    } catch (error) {
+      console.log("addUser error =>", error);
     }
   };
 
@@ -83,5 +100,6 @@ export function useApi() {
     registerUser,
     LoginUser,
     getUserList,
+    addUser,
   };
 }

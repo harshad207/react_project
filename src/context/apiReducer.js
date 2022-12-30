@@ -19,6 +19,11 @@ const reducer = (state, action) => {
         ...state,
         getAllUser: action.payload,
       };
+    // case ApiActions.UPDATE_USER:
+    //   return {
+    //     ...state,
+    //     updateUser: action.payload,
+    //   };
 
     default:
       return state;

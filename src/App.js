@@ -9,7 +9,8 @@ import Error from "./pages/error/Error";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/Login";
 import Register from "./pages/register/Register";
-import User from "./pages/users/User";
+import AddUser from "./pages/users/AddUser";
+import UserTable from "./pages/users/UserTable";
 // import { Toast } from "primereact/toast";
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/user" element={<User />} />
+        <Route exact path="/user" element={<UserTable />} />
+        <Route exact path="/addUser" element={<AddUser />} />
         <Route element={Error} />
       </Routes>
     </>
