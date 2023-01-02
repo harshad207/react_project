@@ -1,20 +1,52 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Users.css";
 import { useApi } from "../../context/useApi";
 const AddUser = () => {
-  const { addUser } = useApi();
+  const { id } = useParams()
+  console.log('iddd', id);
+  const { addUser, getDetail, apiState, updateUser } = useApi();
   const {
     register,
     handleSubmit,
-
+    setValue,
+    reset,
     formState: { errors },
-  } = useForm({});
+  } = useForm({
+    name: '',
+    age: '',
+    salary: ''
+  });
+
+
+  useEffect(() => {
+    reset();
+    getDetail(id);
+    // setUser(apiState.userDetail);
+    setDataValue();
+  }, []);
+
+  const setDataValue = () => {
+    console.log("reserrrrr")
+
+    if (apiState.userDetail) {
+      setValue('name', apiState.userDetail.name)
+      setValue('age', apiState.userDetail.age)
+      setValue('salary', apiState.userDetail.salary)
+    }
+  }
 
   const onSubmit = (data) => {
-    console.log(data);
-    addUser(data);
+    if (id) {
+      let params = data
+      params.id = id
+      updateUser(params)
+
+    } else {
+
+      addUser(data);
+    }
   };
   return (
     <div className="background">

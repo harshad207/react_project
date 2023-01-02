@@ -3,13 +3,23 @@ import "../users/User.css";
 import { useApi } from "../../context/useApi";
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const UserTable = () => {
+  const navigation = useNavigate();
   const { apiState, getUserList } = useApi();
   // getUserList();
   useEffect(() => {
     getUserList();
     console.log("getUser apistate userpage", apiState);
-  }, [apiState.getUserList]);
+  }, []);
+
+
+  const editRecord = (id) => {
+    setTimeout(() => {
+      navigation('/edit/' + id)
+    }, 1000);
+  }
+
   return (
     <div className="parent_user">
       <div className="btn_div mt-5">
@@ -33,9 +43,9 @@ const UserTable = () => {
             </tr>
           </thead>
           <tbody>
-            {apiState.getAllUser.map((item, index) => (
+            {apiState?.getAllUser?.map((item, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
+                <td>{item.id}</td>
                 <td>
                   <img src="/user.jpg" id="img" />
                 </td>
@@ -44,7 +54,7 @@ const UserTable = () => {
                 <td>{item?.salary}</td>
                 <td>
                   <Link
-                    class="btn btn-outline-primary"
+                    className="btn btn-outline-primary"
                     id="icon"
                     onClick={() => {
                       alert("hiirrrrr");
@@ -53,16 +63,16 @@ const UserTable = () => {
                     <FiEye size={20} />
                   </Link>
                   <Link
-                    class="btn btn-outline-info"
+                    className="btn btn-outline-info"
                     id="icon"
-                    onClick={() => {
-                      alert("edit");
-                    }}
+                    onClick={() =>
+                      editRecord(item.id)
+                    }
                   >
                     <FiEdit size={20} />
                   </Link>
                   <Link
-                    class="btn btn-outline-danger"
+                    className="btn btn-outline-danger"
                     id="icon"
                     onClick={() => {
                       alert("delet");
