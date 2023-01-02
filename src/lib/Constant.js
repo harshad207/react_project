@@ -5,4 +5,6 @@ export const BASE_URL = {
   LOGIN_USER: `${AUTH_URL}/login`,
   GET_USER: `${USER}/get/all`,
   CREATE_USER: `${USER}/create`,
+  UPDATE_USER: `${USER}/update`,
+  GET_DETAIL_BY_ID: `${USER}/get/by/id/`,
 };

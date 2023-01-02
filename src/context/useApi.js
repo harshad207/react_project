@@ -4,24 +4,22 @@ import { useContext } from "react";
 import { ApiActions } from "./apiAction";
 import { ApiContext } from "./apiContext";
 
-// import { Toast } from "primereact/toast";
-import { createUser, doLogin, doRegister, getAllUser } from "../lib/Service";
+import { Toast } from "primereact/toast";
+import {
+  createUser,
+  doLogin,
+  doRegister,
+  doUpdateUser,
+  getAllUser,
+  getDetailById,
+} from "../lib/Service";
 export function useApi() {
   const navigate = useNavigate();
-  // const ToastSuccess = (data) => {
-  //   const toast = useRef(null);
-  //   toast.current.show({
-  //     severity: "success",
-  //     summary: "Success Message",
-  //     detail: data,
-  //   });
-  // };
-  const navigation = useNavigate();
+
   const { apiState, dispatch } = useContext(ApiContext);
 
   const registerUser = async (data) => {
     try {
-      //console.log('data', data);
       const response = await doRegister(data);
       console.log("register response is => ", response);
       if (response && response.status) {
@@ -29,10 +27,20 @@ export function useApi() {
           type: ApiActions.LOGIN_USER,
           payload: data,
         });
+        Toast.current.show({
+          severity: "success",
+          summary: "Success Message",
+          detail: response.message,
+        });
         setTimeout(() => {
-          navigation("/login");
+          navigate("/login");
         }, 2000);
       } else {
+        Toast.current.show({
+          severity: "error",
+          summary: "Error Message",
+          detail: response.message,
+        });
       }
     } catch (error) {
       console.log("doRegister error =>", error);
@@ -50,10 +58,20 @@ export function useApi() {
           type: ApiActions.LOGIN_USER,
           payload: response,
         });
+        Toast.current.show({
+          severity: "success",
+          summary: "Success Message",
+          detail: response.message,
+        });
         setTimeout(() => {
-          navigation("/");
+          navigate("/");
         }, 2000);
       } else {
+        Toast.current.show({
+          severity: "error",
+          summary: "Error Message",
+          detail: response.message,
+        });
       }
     } catch (error) {
       console.log("login error error =>", error);
@@ -71,9 +89,30 @@ export function useApi() {
           payload: response.result,
         });
       } else {
+        Toast.current.show({
+          severity: "error",
+          summary: "Error Message",
+          detail: response.message,
+        });
       }
     } catch (error) {
       console.log("getUser error =>", error);
+    }
+  };
+
+  const getDetail = async (id) => {
+    try {
+      const response = await getDetailById(id);
+      console.log("getDetailById", response);
+      if (response && response.status) {
+        dispatch({
+          type: ApiActions.USER_DETAIL,
+          payload: response.result,
+        });
+      } else {
+      }
+    } catch (error) {
+      console.log("getDetailById error =>", error);
     }
   };
 
@@ -81,17 +120,58 @@ export function useApi() {
     try {
       const response = await createUser(data);
       console.log("addUser response is => ", response);
-      // ToastSuccess(response.message);
       if (response && response.status) {
         dispatch({
           type: ApiActions.CREATE_USER,
           payload: response.result,
         });
-        navigate("/user");
+        Toast.current.show({
+          severity: "success",
+          summary: "Success Message",
+          detail: response.message,
+        });
+        setTimeout(() => {
+          navigate("/user");
+        }, 2000);
       } else {
+        Toast.current.show({
+          severity: "error",
+          summary: "Error Message",
+          detail: response.message,
+        });
       }
     } catch (error) {
       console.log("addUser error =>", error);
+    }
+  };
+
+  const updateUser = async (data) => {
+    try {
+      const response = await doUpdateUser(data);
+      console.log("update response is => ", response);
+      // ToastSuccess(response.message);
+      if (response && response.status) {
+        dispatch({
+          type: ApiActions.UPDATE_USER,
+          payload: response.result,
+        });
+        Toast.current.show({
+          severity: "success",
+          summary: "Success Message",
+          detail: response.message,
+        });
+        setTimeout(() => {
+          navigate("/user");
+        }, 2000);
+      } else {
+        Toast.current.show({
+          severity: "error",
+          summary: "Error Message",
+          detail: response.message,
+        });
+      }
+    } catch (error) {
+      console.log("updateUser error =>", error);
     }
   };
 
@@ -101,5 +181,7 @@ export function useApi() {
     LoginUser,
     getUserList,
     addUser,
+    updateUser,
+    getDetail,
   };
 }

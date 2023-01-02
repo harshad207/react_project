@@ -24,11 +24,27 @@ export async function getAllUser() {
   });
 }
 
+export async function getDetailById(id) {
+  return await callApi({
+    url: BASE_URL.GET_DETAIL_BY_ID + id,
+    method: "GET",
+  });
+}
+
 export async function createUser(data) {
   console.log("data", data);
   return await callApi({
     url: BASE_URL.CREATE_USER,
     method: "POST",
+    body: data,
+  });
+}
+
+export async function doUpdateUser(data) {
+  console.log("data", data);
+  return await callApi({
+    url: BASE_URL.UPDATE_USER,
+    method: "PUT",
     body: data,
   });
 }
