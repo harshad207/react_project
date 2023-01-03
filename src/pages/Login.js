@@ -142,16 +142,16 @@ const Login = () => {
                     </a>
                   </div>
 
-                  <div className="text-center text-lg-start mt-4 pt-2">
+                  <div className="text-center text-lg-center mt-4 pt-2">
                     <button
                       type="submit"
                       className="btn btn-primary btn-md w-50"
-                    //   style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                      //   style="padding-left: 2.5rem; padding-right: 2.5rem;"
                     >
                       Login
                     </button>
-                    <p className="small fw-bold mt-2 py-2 mb-3" id="font">
-                      Don't have an account?{" "}
+                    <p className="small fw-bold mt-2 py-2 mb-3 ms--5" id="font">
+                      Don't have an account?
                       <NavLink to="/register" className="text-danger">
                         Register
                       </NavLink>

@@ -7,6 +7,7 @@ import { ApiContext } from "./apiContext";
 import { Toast } from "primereact/toast";
 import {
   createUser,
+  doDeleteUser,
   doLogin,
   doRegister,
   doUpdateUser,
@@ -79,7 +80,6 @@ export function useApi() {
   };
   const getUserList = async () => {
     try {
-      //console.log('data', data);
       const response = await getAllUser();
       console.log("getAllUser response is => ", response);
       // ToastSuccess(response.message);
@@ -100,15 +100,16 @@ export function useApi() {
     }
   };
 
-  const getDetail = async (id) => {
+  const getDetail = async (id, reset) => {
     try {
       const response = await getDetailById(id);
-      console.log("getDetailById", response);
+      console.log("getDetailById response", response);
       if (response && response.status) {
         dispatch({
           type: ApiActions.USER_DETAIL,
           payload: response.result,
         });
+        reset();
       } else {
       }
     } catch (error) {
@@ -174,6 +175,31 @@ export function useApi() {
       console.log("updateUser error =>", error);
     }
   };
+  const deleteUser = async (id) => {
+    try {
+      const response = await doDeleteUser(id);
+      console.log("deleteUser response is => ", response);
+      if (response && response.status) {
+        getUserList();
+        setTimeout(() => {
+          navigate("/user");
+        }, 1000);
+        Toast.current.show({
+          severity: "success",
+          summary: "Success Message",
+          detail: response.message,
+        });
+      } else {
+        Toast.current.show({
+          severity: "error",
+          summary: "Error Message",
+          detail: response.message,
+        });
+      }
+    } catch (error) {
+      console.log("deleteUser error =>", error);
+    }
+  };
 
   return {
     apiState,
@@ -183,5 +209,6 @@ export function useApi() {
     addUser,
     updateUser,
     getDetail,
+    deleteUser,
   };
 }

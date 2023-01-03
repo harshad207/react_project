@@ -7,4 +7,5 @@ export const BASE_URL = {
   CREATE_USER: `${USER}/create`,
   UPDATE_USER: `${USER}/update`,
   GET_DETAIL_BY_ID: `${USER}/get/by/id/`,
+  DELETE_USER: `${USER}/delete/`,
 };

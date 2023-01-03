@@ -13,41 +13,40 @@ const AddUser = () => {
     setValue,
     reset,
     formState: { errors },
-  } = useForm({
-    name: '',
-    age: '',
-    salary: ''
-  });
+  } = useForm();
 
+  // useEffect(() => {
+  //   reset({
+  //     name: "",
+  //     age: "",
+  //     salary: "",
+  //   });
+  // }, []);
 
   useEffect(() => {
     reset();
     getDetail(id);
-    // setUser(apiState.userDetail);
     setDataValue();
   }, []);
 
   const setDataValue = () => {
-    console.log("reserrrrr")
-
     if (apiState.userDetail) {
-      setValue('name', apiState.userDetail.name)
-      setValue('age', apiState.userDetail.age)
-      setValue('salary', apiState.userDetail.salary)
+      setValue("name", apiState.userDetail.name);
+      setValue("age", apiState.userDetail.age);
+      setValue("salary", apiState.userDetail.salary);
     }
-  }
+  };
 
   const onSubmit = (data) => {
     if (id) {
-      let params = data
-      params.id = id
-      updateUser(params)
-
+      let params = data;
+      params.id = id;
+      updateUser(params);
     } else {
-
       addUser(data);
     }
   };
+
   return (
     <div className="background">
       <section className="sub_bgd">
@@ -57,9 +56,8 @@ const AddUser = () => {
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 shadow  rounded  bg-light mt-2">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <p className="font-weight-bold mt-3" id="fSized">
-                  AddUser
+                  {id ? " Edit User" : "AddUser"}
                 </p>
-                {/* <!-- Name input --> */}
                 <div className="form-outline mb-1">
                   <label
                     className="form-label"
@@ -89,7 +87,6 @@ const AddUser = () => {
                     </p>
                   )}
                 </div>
-                {/* <!-- salary input --> */}
                 <div className="form-outline mb-1">
                   <label
                     className="form-label"
@@ -162,10 +159,14 @@ const AddUser = () => {
                   )}
                 </div>
 
-                <div className="text-center text-lg-start mt-4 pt-2">
+                <div className="text-center text-lg-center mt-4 pt-2">
                   <button
                     type="submit"
-                    className="btn btn-primary h-20 w-50 mb-3"
+                    className={
+                      id
+                        ? "btn btn-warning h-20 w-50 mb-3"
+                        : "btn btn-primary h-20 w-50 mb-3"
+                    }
                   >
                     Submit
                   </button>

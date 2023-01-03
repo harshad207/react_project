@@ -13,6 +13,9 @@
 
 #fSized {
     font-size: 30px;
+text-align: center;
+    font-weight: 700;
+    padding-right: 70px;
 }
 
 #font {

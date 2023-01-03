@@ -32,7 +32,6 @@ export async function getDetailById(id) {
 }
 
 export async function createUser(data) {
-  console.log("data", data);
   return await callApi({
     url: BASE_URL.CREATE_USER,
     method: "POST",
@@ -41,10 +40,16 @@ export async function createUser(data) {
 }
 
 export async function doUpdateUser(data) {
-  console.log("data", data);
   return await callApi({
     url: BASE_URL.UPDATE_USER,
     method: "PUT",
     body: data,
+  });
+}
+
+export async function doDeleteUser(id) {
+  return await callApi({
+    url: BASE_URL.DELETE_USER + id,
+    method: "DELETE",
   });
 }
