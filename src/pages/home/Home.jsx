@@ -14,6 +14,9 @@ const Home = () => {
         <Carousel.Item>
           <img className="d-block w-100" src="/image3.jpg" alt="Third slide" />
         </Carousel.Item>
+        <Carousel.Item>
+          <img className="d-block w-100" src="/image4.jpg" alt="Four slide" />
+        </Carousel.Item>
       </Carousel>
     </div>
   );

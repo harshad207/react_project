@@ -1,10 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../src/images/logo192.png";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  let auth = window.localStorage.getItem("token");
+  console.log("auth header", auth);
+
+  const logout = () => {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("token");
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light ">
@@ -48,11 +59,25 @@ const Navbar = () => {
                 contact
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/login" activeclassname="active" exact id="lii">
-                Sign in
-              </NavLink>
-            </li>
+            {auth ? (
+              <li className="nav-item">
+                <Link
+                  to="/user"
+                  activeclassname="active"
+                  exact
+                  id="lii"
+                  onClick={logout}
+                >
+                  logout
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <NavLink to="/login" activeclassname="active" exact id="lii">
+                  Sign in
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

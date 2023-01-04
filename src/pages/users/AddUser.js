@@ -3,10 +3,11 @@ import { NavLink, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Users.css";
 import { useApi } from "../../context/useApi";
+import { getDetailById } from "../../lib/Service";
 const AddUser = () => {
-  const { id } = useParams()
-  console.log('iddd', id);
-  const { addUser, getDetail, apiState, updateUser } = useApi();
+  const { id } = useParams();
+  console.log("iddd", id);
+  const { addUser, updateUser } = useApi();
   const {
     register,
     handleSubmit,
@@ -15,29 +16,21 @@ const AddUser = () => {
     formState: { errors },
   } = useForm();
 
-  // useEffect(() => {
-  //   reset({
-  //     name: "",
-  //     age: "",
-  //     salary: "",
-  //   });
-  // }, []);
-
   useEffect(() => {
     reset();
     getDetail(id);
-    setDataValue();
   }, []);
 
-  const setDataValue = () => {
-    if (apiState.userDetail) {
-      setValue("name", apiState.userDetail.name);
-      setValue("age", apiState.userDetail.age);
-      setValue("salary", apiState.userDetail.salary);
+  const getDetail = async (id) => {
+    const response = await getDetailById(id);
+    if (response.status) {
+      setValue("name", response?.result?.name);
+      setValue("age", response?.result?.age);
+      setValue("salary", response?.result?.salary);
     }
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (id) {
       let params = data;
       params.id = id;

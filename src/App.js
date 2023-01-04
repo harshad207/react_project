@@ -12,12 +12,11 @@ import Register from "./pages/register/Register";
 import AddUser from "./pages/users/AddUser";
 import UserTable from "./pages/users/UserTable";
 import { Toast } from "primereact/toast";
+import RequireAuth from "./Auth";
 
 function App() {
-  // const toast = useRef(null);
   return (
     <>
-      {/* <Toast ref={toast}></Toast> */}
       <Navbar />
       <Toast ref={Toast} />
       <Routes>
@@ -26,7 +25,15 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/user" element={<UserTable />} />
+        <Route
+          exact
+          path="/user"
+          element={
+            <RequireAuth>
+              <UserTable />
+            </RequireAuth>
+          }
+        />
         <Route exact path="/addUser" element={<AddUser />} />
         <Route exact path="/edit/:id" element={<AddUser />} />
         <Route element={Error} />

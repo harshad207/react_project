@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useApi } from "../context/useApi";
 import { Toast } from "primereact/toast";
+import "./home/home.css";
 import "primeicons/primeicons.css";
+import { FcAddressBook, FcUnlock } from "react-icons/fc";
 const Login = () => {
   const toast = useRef(null);
   const { LoginUser, apiState } = useApi();
@@ -22,11 +24,6 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
     LoginUser(data);
-    toast.current.show({
-      severity: "success",
-      summary: "Success Message",
-      detail: apiState.loginUser.message,
-    });
   };
   return (
     <div className="bg">
@@ -46,10 +43,13 @@ const Login = () => {
               </div>
               <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 shadow  mb-5 rounded mt-5 bg-light">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <p className="text-center mt-2 fw-bolder fs-5">Login</p>
+                  <p className="text-center w-100 my-3 fw-bold" id="login">
+                    Login
+                  </p>
                   <div className="form-outline mb-4">
+                    <FcAddressBook size={20} />
                     <label
-                      className="form-label"
+                      className="form-label ms-2"
                       id="font"
                       htmlFor="form3Example3"
                     >
@@ -82,8 +82,9 @@ const Login = () => {
 
                   {/* <!-- Password input --> */}
                   <div className="form-outline mb-3">
+                    <FcUnlock size={20} />
                     <label
-                      className="form-label"
+                      className="form-label ms-2"
                       htmlFor="form3Example4"
                       id="font"
                     >
@@ -137,16 +138,12 @@ const Login = () => {
                         </p>
                       )}
                     </div>
-                    <a href="#!" className="text-body " id="font">
-                      Forgot password?
-                    </a>
                   </div>
 
                   <div className="text-center text-lg-center mt-4 pt-2">
                     <button
                       type="submit"
                       className="btn btn-primary btn-md w-50"
-                      //   style="padding-left: 2.5rem; padding-right: 2.5rem;"
                     >
                       Login
                     </button>

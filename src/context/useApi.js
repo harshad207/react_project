@@ -50,22 +50,22 @@ export function useApi() {
 
   const LoginUser = async (data) => {
     try {
-      //console.log('data', data);
       const response = await doLogin(data);
       console.log("login response is => ", response);
-      // ToastSuccess(response.message);
       if (response && response.status) {
         dispatch({
           type: ApiActions.LOGIN_USER,
           payload: response,
         });
+        localStorage.setItem("userData", JSON.stringify(response.result));
+        localStorage.setItem("token", response?.result?.token);
         Toast.current.show({
           severity: "success",
           summary: "Success Message",
           detail: response.message,
         });
         setTimeout(() => {
-          navigate("/");
+          navigate("/user");
         }, 2000);
       } else {
         Toast.current.show({
@@ -82,7 +82,6 @@ export function useApi() {
     try {
       const response = await getAllUser();
       console.log("getAllUser response is => ", response);
-      // ToastSuccess(response.message);
       if (response && response.status) {
         dispatch({
           type: ApiActions.GET_ALL_USER,
@@ -100,7 +99,7 @@ export function useApi() {
     }
   };
 
-  const getDetail = async (id, reset) => {
+  const getDetail = async (id) => {
     try {
       const response = await getDetailById(id);
       console.log("getDetailById response", response);
@@ -109,7 +108,6 @@ export function useApi() {
           type: ApiActions.USER_DETAIL,
           payload: response.result,
         });
-        reset();
       } else {
       }
     } catch (error) {
