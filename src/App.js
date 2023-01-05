@@ -12,7 +12,7 @@ import Register from "./pages/register/Register";
 import AddUser from "./pages/users/AddUser";
 import UserTable from "./pages/users/UserTable";
 import { Toast } from "primereact/toast";
-import RequireAuth from "./Auth";
+import Auth from "./Auth";
 
 function App() {
   return (
@@ -25,9 +25,10 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/user" element={<UserTable />} />
-        <Route exact path="/addUser" element={<AddUser />} />
-        <Route exact path="/edit/:id" element={<AddUser />} />
+
+        <Route exact path="/user" element={<Auth Children={UserTable} />} />
+        <Route exact path="/addUser" element={<Auth Children={AddUser} />} />
+        <Route exact path="/edit/:id" element={<Auth Children={AddUser} />} />
         <Route element={Error} />
       </Routes>
     </>

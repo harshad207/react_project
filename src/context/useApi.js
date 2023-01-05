@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ApiActions } from "./apiAction";
 import { ApiContext } from "./apiContext";
-
 import { Toast } from "primereact/toast";
 import {
   createUser,
@@ -66,7 +65,7 @@ export function useApi() {
         });
         setTimeout(() => {
           Toast.current.clear();
-          navigate("/user");
+          navigate("/");
         }, 1000);
       } else {
         Toast.current.show({
