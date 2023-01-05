@@ -3,18 +3,30 @@ import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../src/images/logo192.png";
 import "./Navbar.css";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { useApi } from "../context/useApi";
+import { Toast } from "primereact/toast";
 
 const Navbar = () => {
+  const { apiState } = useApi();
   const navigate = useNavigate();
   let auth = window.localStorage.getItem("token");
+  let userName = JSON.parse(window.localStorage.getItem("userData"));
+  console.log("apiState", apiState);
   console.log("auth header", auth);
 
   const logout = () => {
     localStorage.removeItem("userData");
     localStorage.removeItem("token");
+    Toast.current.show({
+      severity: "success",
+      summary: "Success Message",
+      detail: "logout successfully",
+    });
     setTimeout(() => {
+      Toast.current.clear();
       navigate("/");
-    }, 2000);
+    }, 1000);
   };
   return (
     <>
@@ -59,25 +71,42 @@ const Navbar = () => {
                 contact
               </NavLink>
             </li>
-            {auth ? (
-              <li className="nav-item">
-                <Link
-                  to="/user"
-                  activeclassname="active"
-                  exact
-                  id="lii"
-                  onClick={logout}
-                >
-                  logout
-                </Link>
-              </li>
-            ) : (
-              <li className="nav-item">
-                <NavLink to="/login" activeclassname="active" exact id="lii">
-                  Sign in
-                </NavLink>
-              </li>
-            )}
+
+            <li className="nav-item">
+              <NavDropdown
+                title={userName ? userName?.name : "profile"}
+                id="lii"
+                activeclassname="active"
+                exact
+              >
+                <NavDropdown.Item eventKey="">
+                  {auth ? (
+                    <li className="nav-item">
+                      <Link
+                        // to="/user"
+                        // activeclassname="active"
+                        exact
+                        id="lii"
+                        onClick={logout}
+                      >
+                        logout
+                      </Link>
+                    </li>
+                  ) : (
+                    <li className="nav-item">
+                      <NavLink
+                        to="/login"
+                        activeclassname="active"
+                        exact
+                        id="lii"
+                      >
+                        login in
+                      </NavLink>
+                    </li>
+                  )}
+                </NavDropdown.Item>
+              </NavDropdown>
+            </li>
           </ul>
         </div>
       </nav>

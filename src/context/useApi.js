@@ -35,7 +35,7 @@ export function useApi() {
         });
         setTimeout(() => {
           navigate("/login");
-        }, 2000);
+        }, 1000);
       } else {
         Toast.current.show({
           severity: "error",
@@ -65,8 +65,9 @@ export function useApi() {
           detail: response.message,
         });
         setTimeout(() => {
+          Toast.current.clear();
           navigate("/user");
-        }, 2000);
+        }, 1000);
       } else {
         Toast.current.show({
           severity: "error",
@@ -131,7 +132,7 @@ export function useApi() {
         });
         setTimeout(() => {
           navigate("/user");
-        }, 2000);
+        }, 1000);
       } else {
         Toast.current.show({
           severity: "error",
@@ -161,7 +162,7 @@ export function useApi() {
         });
         setTimeout(() => {
           navigate("/user");
-        }, 2000);
+        }, 1000);
       } else {
         Toast.current.show({
           severity: "error",

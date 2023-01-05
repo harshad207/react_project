@@ -1,5 +1,5 @@
 // import "./App.css";
-import React, { useRef } from "react";
+import React, { Children, useRef } from "react";
 import Navbar from "./Header/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
@@ -25,15 +25,7 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/about" element={<About />} />
         <Route exact path="/contact" element={<Contact />} />
-        <Route
-          exact
-          path="/user"
-          element={
-            <RequireAuth>
-              <UserTable />
-            </RequireAuth>
-          }
-        />
+        <Route exact path="/user" element={<UserTable />} />
         <Route exact path="/addUser" element={<AddUser />} />
         <Route exact path="/edit/:id" element={<AddUser />} />
         <Route element={Error} />

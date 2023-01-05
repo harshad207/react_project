@@ -37,7 +37,6 @@ const UserTable = () => {
       const result = await getDetailById(id);
       console.log("result==+", result);
       setData(result);
-      console.log("data", data);
     }
   };
   return (
