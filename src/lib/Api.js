@@ -1,8 +1,10 @@
+import { Toast } from "primereact/toast";
 import axios from "axios";
 // import { getStorage } from "../util/storage";
 // import { STORAGE } from "./constant";
 const API_URL = "http://localhost:4200";
 const API_VERSION = "/api/v1/";
+
 export const IMAGE_URL = API_URL + "/";
 
 export async function callApi({ url, method, body, headers }) {
@@ -15,11 +17,6 @@ export async function callApi({ url, method, body, headers }) {
     Expires: "0",
   };
 
-  // const token = await getStorage(STORAGE.TOKEN);
-  // console.log("call api8888", token);
-  // if (token) {
-  //   headersData.Authorization = token;
-  // }
   if (url.indexOf("file/single-upload") !== -1) {
     try {
       const data = new FormData();
@@ -42,7 +39,6 @@ export async function callApi({ url, method, body, headers }) {
     }
   } else {
     let configData = {};
-    // eslint-disable-next-line eqeqeq
     if (method != "GET") {
       configData = {
         method,
@@ -58,9 +54,9 @@ export async function callApi({ url, method, body, headers }) {
       };
     }
     try {
-      console.log("configData=>======>", configData);
+      // console.log("configData=>======>", configData);
       const result = await axios(configData);
-      console.log("result axios=====>", result);
+      // console.log("result axios=====>", result);
       if (result.data) {
         return result.data;
       }
@@ -72,18 +68,13 @@ export async function callApi({ url, method, body, headers }) {
 }
 export const errorHandler = (error) => {
   const { request, response } = error;
-  // console.log(response);
   if (response) {
-    console.log(response);
+    // console.log("222222222222", response);
+
     let result = response.data ? response.data : null;
     let message = "";
     if (result && result.status === false) {
-      let errors = result.errors ? result.errors : null;
-      if (errors && Array.isArray(errors) && errors.length > 0) {
-        message = errors[0].msg ? errors[0].msg : null;
-      } else {
-        message = result.msg ? result.msg : null;
-      }
+      message = result.message ? result.message : null;
     }
     return {
       message: message ? message : null,
@@ -95,7 +86,6 @@ export const errorHandler = (error) => {
       status: false,
     };
   } else {
-    // Something happened in setting up the request that triggered an Error
     return {
       message: "opps! something went wrong while setting up request",
       status: false,

@@ -19,12 +19,12 @@ const Register = () => {
     });
     const { registerUser } = useApi();
     const onSubmit = (data) => {
-        registerUser(data);
-        toast.current.show({
-            severity: "success",
-            summary: "Success Message",
-            detail: "Registered successfully",
-        });
+      registerUser(data);
+      // toast.current.show({
+      //     severity: "success",
+      //     summary: "Success Message",
+      //     detail: "Registered successfully",
+      // });
     };
     return (
       <div className="background">

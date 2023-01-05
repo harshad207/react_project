@@ -4,16 +4,12 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../src/images/logo192.png";
 import "./Navbar.css";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useApi } from "../context/useApi";
 import { Toast } from "primereact/toast";
 
 const Navbar = () => {
-  const { apiState } = useApi();
   const navigate = useNavigate();
   let auth = window.localStorage.getItem("token");
   let userName = JSON.parse(window.localStorage.getItem("userData"));
-  console.log("apiState", apiState);
-  console.log("auth header", auth);
 
   const logout = () => {
     localStorage.removeItem("userData");
