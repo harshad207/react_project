@@ -35,7 +35,7 @@ const Navbar = () => {
             <li className="nav-item">
               <h4 className=" text-light mt-2">React.js</h4>
             </li>
-            <ul className="right">
+            {auth ? <ul className="right">
               <li className="nav-item mt-2">
                 <NavLink
                   to="/user"
@@ -47,7 +47,7 @@ const Navbar = () => {
                   User
                 </NavLink>
               </li>
-            </ul>
+            </ul> : null}
           </div>
           <ul className="right">
             <li className="nav-item">
