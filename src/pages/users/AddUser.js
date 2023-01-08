@@ -4,7 +4,11 @@ import { useForm } from "react-hook-form";
 import "./Users.css";
 import { useApi } from "../../context/useApi";
 import { getDetailById } from "../../lib/Service";
+import Loader from "../../loader/Loader";
+
 const AddUser = () => {
+  const [loading, SetLoading] = useState(false)
+
   const { id } = useParams();
   console.log("iddd", id);
   const { addUser, updateUser } = useApi();
@@ -22,8 +26,10 @@ const AddUser = () => {
   }, []);
 
   const getDetail = async (id) => {
+    SetLoading(true)
     const response = await getDetailById(id);
     if (response.status) {
+      SetLoading(false)
       setValue("name", response?.result?.name);
       setValue("age", response?.result?.age);
       setValue("salary", response?.result?.salary);
@@ -43,7 +49,8 @@ const AddUser = () => {
   return (
     <div className="background">
       <section className="sub_bgd">
-        {/* <Toast ref={toast}></Toast> */}
+        <Loader loading={loading} />
+
         <div className="form">
           <div className="row d-flex justify-content-center align-items-center h-50 reg-row">
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 shadow  rounded  bg-light mt-2">

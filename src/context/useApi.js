@@ -78,10 +78,12 @@ export function useApi() {
       console.log("login error error =>", error);
     }
   };
-  const getUserList = async () => {
+  const getUserList = async (SetLoading) => {
     try {
+      SetLoading(true)
       const response = await getAllUser();
       console.log("getAllUser response is => ", response);
+      SetLoading(false)
       if (response && response.status) {
         dispatch({
           type: ApiActions.GET_ALL_USER,

@@ -7,13 +7,17 @@
     padding: 31px 10px;
 }
 
+.sub_bgd {
+    height: 90vh
+}
+
 .reg-row {
     margin: 0;
 }
 
 #fSized {
     font-size: 30px;
-text-align: center;
+    text-align: center;
     font-weight: 700;
     padding-right: 70px;
 }

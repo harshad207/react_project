@@ -1,0 +1,13 @@
+.loader {
+    /* padding: 30px; */
+    margin-top: -48px;
+    margin-left: -30px;
+    height: 91.5vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    z-index: 999;
+}

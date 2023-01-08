@@ -4,18 +4,22 @@ import { useApi } from "../../context/useApi";
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getDetailById } from "../../lib/Service";
+import Loader from "../../loader/Loader";
 
 const UserTable = () => {
+  const [loading, SetLoading] = useState(false)
+
   const navigation = useNavigate();
   const { apiState, getUserList, deleteUser } = useApi();
   const [show, setShow] = useState(false);
   const [data, setData] = useState({});
 
+
   useEffect(() => {
-    getUserList();
+    getUserList(SetLoading);
+
   }, []);
 
   const editRecord = (id) => {
@@ -25,22 +29,27 @@ const UserTable = () => {
   };
 
   const deleteRecord = (id) => {
+    SetLoading(true)
     deleteUser(id);
+    SetLoading(false)
   };
 
   const handleClose = () => setShow(false);
-  useEffect(() => {}, []);
 
   const handleShow = async (id) => {
-    setShow(true);
+    SetLoading(true)
     if (id) {
       const result = await getDetailById(id);
       console.log("result==+", result);
+      setShow(true);
+      SetLoading(false)
       setData(result);
     }
   };
   return (
     <div className="parent_user">
+      <Loader loading={loading} />
+
       <div className="btn_div mt-5">
         <Link to="/addUser" className="btn btn-outline-info">
           Add User

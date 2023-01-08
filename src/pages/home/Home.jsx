@@ -1,9 +1,21 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 // import "../home/home.css";
 import Carousel from "react-bootstrap/Carousel";
+import Loader from "../../loader/Loader";
 const Home = () => {
+  const [loading, SetLoading] = useState(false)
+
+  useEffect(() => {
+    SetLoading(true)
+    setTimeout(() => {
+      SetLoading(false)
+    }, 2000);
+  }, [])
   return (
     <div className="carousel">
+      <Loader loading={loading} />
       <Carousel>
         <Carousel.Item interval={1000}>
           <img className="d-block w-100" src="/image1.jpg" alt="First slide" />
